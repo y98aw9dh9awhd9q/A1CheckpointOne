@@ -11,6 +11,9 @@ blue = (0,0,255)
 yellow = (255,255,0)
 gray = (55,55,55)
 orange = (255,255,0)
+soulModeRed = 0
+soulModeGreen = 1
+soulModeBlue = 2
 
 labels = {
     shopNode: "Shop",

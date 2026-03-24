@@ -18,7 +18,7 @@ class soul:
         self.shieldDir = 0
 
     def getShieldRect(self):
-        if not self.soulMode:
+        if self.soulMode != const.soulModeGreen:
             return None
         if self.shieldDir == 0:
             return pygame.Rect(self.rect.centerx - 20, self.rect.top - 10, 40, 10)
@@ -31,6 +31,8 @@ class soul:
 
     def update(self, deltaTime, boundary):
         dx, dy = 0, 0
+        if self.soulMode == const.soulModeBlue:
+            dy += 0.5
 
         if self.centerSelf:
             self.rect.center = self.pos
@@ -46,24 +48,35 @@ class soul:
                 self.rect.center = boundary.center
             self.prevSoulMode = self.soulMode
 
-        if not self.soulMode:
-            if key[pygame.K_LEFT]:
-                dx -= 1
-            if key[pygame.K_RIGHT]:
-                dx += 1
-            if key[pygame.K_UP]:
-                dy -= 1
-            if key[pygame.K_DOWN]:
-                dy += 1
-        else:
-            if key[pygame.K_UP]:
-                self.shieldDir = 0
-            if key[pygame.K_DOWN]:
-                self.shieldDir = 1
-            if key[pygame.K_LEFT]:
-                self.shieldDir = 2
-            if key[pygame.K_RIGHT]:
-                self.shieldDir = 3
+        match self.soulMode:
+            case const.soulModeGreen:
+                if key[pygame.K_w] or key[pygame.K_UP]:
+                    self.shieldDir = 0
+                if key[pygame.K_s] or key[pygame.K_DOWN]:
+                    self.shieldDir = 1
+                if key[pygame.K_a] or key[pygame.K_LEFT]:
+                    self.shieldDir = 2
+                if key[pygame.K_d] or key[pygame.K_RIGHT]:
+                    self.shieldDir = 3
+
+            case const.soulModeBlue:
+                if key[pygame.K_LEFT] or key[pygame.K_a]:
+                    dx -= 1
+                if key[pygame.K_RIGHT] or key[pygame.K_d]:
+                    dx += 1
+                if key[pygame.K_UP] or key[pygame.K_w] and self.rect.bottom == boundary.bottom:
+                    dy -= 1
+                if key[pygame.K_DOWN] or key[pygame.K_s]:
+                    dy += 1
+            case _:
+                if key[pygame.K_LEFT] or key[pygame.K_a]:
+                    dx -= 1
+                if key[pygame.K_RIGHT] or key[pygame.K_d]:
+                    dx += 1
+                if key[pygame.K_UP] or key[pygame.K_w]:
+                    dy -= 1
+                if key[pygame.K_DOWN] or key[pygame.K_s]:
+                    dy += 1
 
         velocity = pygame.Vector2(dx, dy)
 
@@ -86,7 +99,7 @@ class soul:
     def drawSoul(self, screen):
         screen.blit(self.image, self.rect)
 
-        if self.soulMode:
+        if self.soulMode == const.soulModeGreen:
             shieldRect = self.getShieldRect()
             pygame.draw.rect(screen, (0, 255, 0), shieldRect)
 

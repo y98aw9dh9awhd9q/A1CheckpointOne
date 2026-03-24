@@ -2,6 +2,7 @@ import os
 import random
 import pygame
 import const
+import json
 
 from game.gameHandler.pygameWindow import nodes
 from ai.chat import generateText
@@ -29,6 +30,18 @@ global bossIndex
 storyState  = 0
 combatState = 1
 
+def readSave():
+    with open('save.json','r') as file:
+        data = json.load(file)
+    return(data)
+
+def savetoSave(element,newData):
+    with open('save.json','r') as file:
+        data = json.load(file)
+    data[element] = newData
+    with open('save.json','w') as file:
+        file.dump(data, file,indent=4)
+
 def startDisplay():
     pygame.init()
     pygame.display.set_caption("PharohTale")
@@ -44,7 +57,7 @@ def startDisplay():
 
     global blueStop, shop, player, generatedOptions, trader, questNpc, roundCounter, manager, bossIndex
 
-    player = pl(1)
+    player = pl(readSave())
     shop = shoppersDrugMart(screen, player)
     trader = tradar(screen, player)
     questNpc = quest(screen, player)

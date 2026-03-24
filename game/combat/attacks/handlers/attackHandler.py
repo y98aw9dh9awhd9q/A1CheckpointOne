@@ -1,3 +1,4 @@
+import const
 from game.combat.attacks.nagraISANGRY import nagraISANGRY
 from game.combat.combatMenu.boundaryLogic.boundary import boundaryLogic
 from game.combat.attacks.nagraIsGrinch import nagraIsGrinch
@@ -13,17 +14,23 @@ class attackHandler:
         self.endCalled = False
         self.player = player
 
-    def startTurn(self, enemyAttacks, greenSoul=False):
-        isGreen = greenSoul or any(
+    def startTurn(self, enemyAttacks, soulMode = 0):
+        isGreen = soulMode == const.soulModeGreen or any(
             (atkClass is nagraIsGrinch or atkClass is nagraISANGRY)
             for entry in enemyAttacks
             for atkClass in [entry[0] if isinstance(entry, tuple) else entry]
         )
+        isBlue = soulMode == const.soulModeBlue or any(
+            (atkClass is None)
+            for entry in enemyAttacks
+            for atkClass in [entry[0] if isinstance(entry, tuple) else entry]
+        )
         if isGreen:
-            self.boundary = boundaryLogic(self.screen, self.player, 25, True)
+            self.boundary = boundaryLogic(self.screen, self.player, const.soulModeGreen, 25)
+        elif isBlue:
+            self.boundary = boundaryLogic(self.screen, self.player, const.soulModeGreen, 25)
         else:
-            self.boundary = boundaryLogic(self.screen, self.player)
-
+            self.boundary = boundaryLogic(self.screen, self.player,const.soulModeRed)
         self.attacks = []
         self.turnTimer = 0.0
         self.endCalled = False

@@ -1,21 +1,20 @@
 from game.combat.entities import entitySuper
 
-
 class player(entitySuper.livingEntity):
-    def __init__(self, name="LIBOR", hp=200, attack=2, defense=20, level=1, gold=100, maxHp=20,xp=0,kills = 0):
-        super().__init__(name, hp, attack, defense)
-        self.level = level
-        self.gold = gold
-        self.maxHp = maxHp
-        self.hp = hp
-        self.inventory = []
+    def __init__(self, saveData, name="LIBOR",):
+        super().__init__(name, saveData["hp"], saveData["attack"], saveData["defence"])
+        self.level = saveData["level"]
+        self.gold = saveData["gold"]
+        self.maxHp = saveData["maxHp"]
+        self.hp = saveData["hp"]
+        self.inventory = saveData["inventory"]
         self.weapon = None
         self.armor = None
-        self.baseDef = defense
-        self.baseATK = attack
-        self.atk = attack
-        self.LOVE = xp
-        self.kills = kills
+        self.baseDef = saveData["baseDef"]
+        self.baseATK = saveData["baseATK"]
+        self.atk = saveData["attack"]
+        self.LOVE = saveData["xp"]
+        self.kills = saveData["kills"]
 
     def getAtk(self):
         return self.atk

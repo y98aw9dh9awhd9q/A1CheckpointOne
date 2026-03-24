@@ -64,7 +64,7 @@ def circleAngel(playerLevel=1):
 
 def nagraNotGeno(playerLevel=1):
     hp = 180 + playerLevel * 2
-    e = enemy("NAGRA", hp, 5, 15, "nagraNotGeno.png", scale, 100)
+    e = enemy("NAGRA", hp, 5, 7, "nagraNotGeno.png", scale, 100)
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
     e.mercyable = True

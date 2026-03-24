@@ -44,7 +44,7 @@ class combatManager:
     stateWin = "win"
     stateLose = "lose"
 
-    def __init__(self, screen, player, soulMode=0):
+    def __init__(self, screen, player):
         self.MERCY = False
         self.enemyLogger = []
         self.screen = screen
@@ -68,7 +68,6 @@ class combatManager:
         self.fontMed = pygame.font.SysFont("Arial", 22, bold=True)
         self.fontSmall = pygame.font.SysFont("Arial", 16, bold=True)
         self.gold = 10
-        self.soulMode = soulMode
 
     def startBattle(self, enemies):
         self.enemies = enemies[:3]

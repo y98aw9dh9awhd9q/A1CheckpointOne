@@ -11,14 +11,14 @@ class boundaryLogic:
     stateEnding = 2
     stateDone = 3
 
-    def __init__(self,screen,player,boundarySize = 350,greenSoul = False):
+    def __init__(self,screen,player,soulMode = 0, boundarySize = 350):
         self.screen = screen
         w,h = screen.get_size()
         self.center = pygame.Vector2(w//2,h//2)
         self.width = 0
         self.height = 0
         self.state = self.stateExpanding
-        self.player = soul(self.center,player, greenSoul)
+        self.player = soul(self.center,player, soulMode)
         self.attacks = []
         self.boundarySize = boundarySize
 
