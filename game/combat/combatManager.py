@@ -1,7 +1,7 @@
 import random
 import pygame
 import const
-
+from game.gameHandler.pygameWindow.soundManager import playVineBoom
 from game.combat.entities.enemyDrawer import enemyDrawer
 from game.combat.attacks.handlers.attackHandler import attackHandler
 
@@ -26,6 +26,7 @@ class damagePopup:
         s.set_alpha(max(0, int(self.alpha)))
         surf.blit(s, (int(self.x) - s.get_width() // 2, int(self.y)))
 
+
 class combatManager:
     screenW = 900
     screenH = 600
@@ -34,29 +35,35 @@ class combatManager:
     btnH = 44
     btnGap = 16
     menuLabels = ["FIGHT", "SKIP", "ITEM", "MERCY"]
-    stateMenu = "menu"
-    stateTargetSelect = "targetSelect"
-    stateFightAnim = "fightAnim"
-    stateDodging = "dodging"
-    stateAct = "act"
-    stateItem = "item"
-    stateMercy = "mercy"
-    stateWin = "win"
-    stateLose = "lose"
+    stateMenu          = "menu"
+    stateTargetSelect  = "targetSelect"
+    stateFightAnim     = "fightAnim"
+    stateDodging       = "dodging"
+    stateAct           = "act"
+    stateItem          = "item"
+    stateMercy         = "mercy"
+    stateWin           = "win"
+    stateLose          = "lose"
+    statePharohGoodEnd = "pharohGoodEnd"
+    statePharohBadEnd  = "pharohBadEnd"
 
-    def __init__(self, screen, player):
+    def __init__(self, screen, player, killedNagra=False):
         self.MERCY = False
         self.enemyLogger = []
         self.screen = screen
         self.player = player
+        self.killedNagra = killedNagra
         self.enemies = []
         self.started = False
         self.battleOver = False
         self.victory = False
+        self.goodEnding = False
+        self.badEnding = False
         self.state = self.stateMenu
         self.selected = 0
         self.targeted = 0
         self.animTimer = 0.0
+        self.cutsceneTimer = 0.0
         self.msg = ""
         self.hpFlash = 0.0
         self.popups = []
@@ -65,7 +72,7 @@ class combatManager:
         self.drawer = enemyDrawer()
         self.attHandler = attackHandler(screen, player)
         self.fontLarge = pygame.font.SysFont("Arial", 28, bold=True)
-        self.fontMed = pygame.font.SysFont("Arial", 22, bold=True)
+        self.fontMed   = pygame.font.SysFont("Arial", 22, bold=True)
         self.fontSmall = pygame.font.SysFont("Arial", 16, bold=True)
         self.gold = 10
 
@@ -74,6 +81,8 @@ class combatManager:
         self.started = True
         self.battleOver = False
         self.victory = False
+        self.goodEnding = False
+        self.badEnding = False
         self.MERCY = False
         self.state = self.stateMenu
         self.selected = 0
@@ -86,6 +95,7 @@ class combatManager:
         self.itemCursor = 0
         self.turnsInBattle = 0
         self.attackedThisTurn = False
+        self.cutsceneTimer = 0.0
 
     def reset(self):
         self.started = False
@@ -110,6 +120,10 @@ class combatManager:
             self.updateSubMenu(keyEvents)
         elif self.state in (self.stateWin, self.stateLose):
             self.updateEnd(keyEvents)
+        elif self.state == self.statePharohGoodEnd:
+            self.updatePharohGoodEnd(dt, keyEvents)
+        elif self.state == self.statePharohBadEnd:
+            self.updatePharohBadEnd(dt, keyEvents)
 
         for entity in self.enemies:
             entity.update(dt)
@@ -124,7 +138,7 @@ class combatManager:
         surf = self.screen
         surf.fill(const.black)
 
-        if self.state != self.stateDodging:
+        if self.state not in (self.stateDodging, self.statePharohGoodEnd, self.statePharohBadEnd):
             showHp = self.state in (self.stateTargetSelect, self.stateFightAnim)
             self.drawer.draw(surf, self.enemies, showHp=showHp, targeted=self.targeted)
             self.drawMsgBox(surf)
@@ -140,8 +154,12 @@ class combatManager:
         if self.state == self.stateItem:
             self.drawItemMenu(surf)
 
-        self.drawHud(surf)
-        self.drawMenu(surf)
+        if self.state in (self.statePharohGoodEnd, self.statePharohBadEnd):
+            self.drawCutscene(surf)
+        else:
+            self.drawHud(surf)
+            self.drawMenu(surf)
+
         for p in self.popups:
             p.draw(surf)
 
@@ -158,8 +176,7 @@ class combatManager:
         for e in self.enemies:
             if not e.alive:
                 continue
-            mercyTurns = getattr(e, "mercyTurns", 0)
-            if getattr(e, "mercyable", False) and self.turnsInBattle >= mercyTurns:
+            if getattr(e, "mercyable", False) and self.turnsInBattle >= getattr(e, "mercyTurns", 0):
                 return True
         return False
 
@@ -181,13 +198,22 @@ class combatManager:
             self.msg = ""
         elif choice == "MERCY":
             if self.hasMercyableEnemies():
+                pharohSpared = False
                 for e in self.enemies:
                     if not e.alive:
                         continue
-                    mercyTurns = getattr(e, "mercyTurns", 0)
-                    if getattr(e, "mercyable", False) and self.turnsInBattle >= mercyTurns:
+                    if getattr(e, "mercyable", False) and self.turnsInBattle >= getattr(e, "mercyTurns", 0):
                         e.alive = False
-                if all(not e.alive for e in self.enemies):
+                        if getattr(e, "isPharoh", False):
+                            pharohSpared = True
+
+                if pharohSpared:
+                    self.cutsceneTimer = 0.0
+                    if not self.killedNagra:
+                        self.state = self.statePharohGoodEnd
+                    else:
+                        self.state = self.statePharohBadEnd
+                elif all(not e.alive for e in self.enemies):
                     self.state = self.stateWin
                     self.msg = "mercy"
                     self.victory = True
@@ -197,6 +223,52 @@ class combatManager:
             else:
                 self.state = self.stateMercy
                 self.msg = "not yet"
+
+    def updatePharohGoodEnd(self, dt, keyEvents):
+        self.cutsceneTimer += dt
+        for e in keyEvents:
+            if e.key in (pygame.K_z, pygame.K_RETURN, pygame.K_SPACE) and self.cutsceneTimer > 2.0:
+                self.goodEnding = True
+                self.victory = True
+                self.MERCY = True
+                self.battleOver = True
+
+    def updatePharohBadEnd(self, dt, keyEvents):
+        self.cutsceneTimer += dt
+        for e in keyEvents:
+            if e.key in (pygame.K_z, pygame.K_RETURN, pygame.K_SPACE) and self.cutsceneTimer > 2.0:
+                self.badEnding = True
+                self.victory = False
+                self.battleOver = True
+
+    def drawCutscene(self, surf):
+        surf.fill(const.black)
+        if self.state == self.statePharohGoodEnd:
+            lines = [
+                "HES HERE",
+                "MR NAGRA",
+                "good ending"
+            ]
+            col = const.yellow
+        else:
+            lines = [
+                "nagra is dead",
+                '"youre cooked"',
+                "bad ending",
+            ]
+            col = const.red
+
+        visibleLines = min(len(lines), max(1, int(self.cutsceneTimer / 0.8)))
+        y = 160
+        for line in lines[:visibleLines]:
+            s = self.fontMed.render(line, True, col)
+            surf.blit(s, (self.screenW // 2 - s.get_width() // 2, y))
+            y += s.get_height() + 18
+            playVineBoom()
+
+        if self.cutsceneTimer > 2.0:
+            hint = self.fontSmall.render("z or enter to continue", True, const.white)
+            surf.blit(hint, (self.screenW // 2 - hint.get_width() // 2, self.screenH - 40))
 
     def updateTargetSelect(self, keyEvents):
         aliveIdx = [i for i, entity in enumerate(self.enemies) if entity.alive]
@@ -361,20 +433,16 @@ class combatManager:
         for i, item in enumerate(visible):
             actualIdx = startIdx + i
             isCursor = actualIdx == self.itemCursor
-
             itemType = item.get("type", "")
-
             if itemType == "potion":
                 action = "use"
             elif self.player.weapon == item or self.player.armor == item:
                 action = "unequip"
             else:
                 action = "equip" if itemType in ("weapon", "armor") else ""
-
             label = f"{item['name']}  ({item.get('effect', itemType)})"
             if action:
                 label += f"  [{action}]"
-
             col = const.yellow if isCursor else const.white
             ls = self.fontSmall.render(("* " if isCursor else "  ") + label, True, col)
             surf.blit(ls, (boxX + 14, y))
@@ -385,12 +453,12 @@ class combatManager:
         pygame.draw.line(surf, const.white, (0, py - 2), (self.screenW, py - 2), 2)
 
         nameSurf = self.fontMed.render("LIBOR", True, const.yellow)
-        lvSurf = self.fontSmall.render(f"LV  {self.player.level}", True, const.white)
+        lvSurf   = self.fontSmall.render(f"LV  {self.player.level}", True, const.white)
         surf.blit(nameSurf, (30, py + 10))
-        surf.blit(lvSurf, (30, py + 10 + nameSurf.get_height() + 2))
+        surf.blit(lvSurf,   (30, py + 10 + nameSurf.get_height() + 2))
 
         hpLabel = self.fontMed.render("HP", True, const.white)
-        cx = self.screenW // 2
+        cx   = self.screenW // 2
         barW = 220
         barH = 14
         barX = cx - barW // 2
@@ -405,8 +473,8 @@ class combatManager:
             barCol = const.yellow
 
         surf.blit(hpLabel, (barX - hpLabel.get_width() - 10, barY + barH // 2 - hpLabel.get_height() // 2))
-        pygame.draw.rect(surf, const.gray, (barX, barY, barW, barH))
-        pygame.draw.rect(surf, barCol, (barX, barY, int(barW * frac), barH))
+        pygame.draw.rect(surf, const.gray,  (barX, barY, barW, barH))
+        pygame.draw.rect(surf, barCol,      (barX, barY, int(barW * frac), barH))
         pygame.draw.rect(surf, const.white, (barX, barY, barW, barH), 2)
 
         hpNums = self.fontSmall.render(f"{max(0, int(self.player.hp))}  /  {int(self.player.maxHp)}", True, const.white)
@@ -415,7 +483,7 @@ class combatManager:
     def drawMenu(self, surf):
         if self.state in (self.stateWin, self.stateLose):
             col = const.yellow if self.state == self.stateWin else const.red
-            msgSurf = self.fontLarge.render(self.msg, True, col)
+            msgSurf  = self.fontLarge.render(self.msg, True, col)
             surf.blit(msgSurf, (self.screenW // 2 - msgSurf.get_width() // 2, self.panelY + 90))
             contSurf = self.fontSmall.render("z or enter", True, const.white)
             surf.blit(contSurf, (self.screenW // 2 - contSurf.get_width() // 2, self.panelY + 130))
@@ -426,7 +494,7 @@ class combatManager:
 
         totalW = 4 * self.btnW + 3 * self.btnGap
         startX = (self.screenW - totalW) // 2
-        btnY = self.panelY + 68
+        btnY   = self.panelY + 68
         canMercy = self.hasMercyableEnemies()
 
         for i, label in enumerate(self.menuLabels):

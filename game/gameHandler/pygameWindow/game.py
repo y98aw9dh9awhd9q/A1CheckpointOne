@@ -6,7 +6,7 @@ import json
 
 from game.gameHandler.pygameWindow import nodes
 from ai.chat import generateText
-from game.gameHandler.pygameWindow.soundManager import playVineBoom, playBattleMusic, stopAudio, playYippie,playboss1Music,playboss2Music,playgenocideNAgra
+from game.gameHandler.pygameWindow.soundManager import playVineBoom, playBattleMusic, stopAudio, playYippie, playboss1Music, playboss2Music, playgenocideNAgra
 from game.gameHandler.shops.shop import shop as shoppersDrugMart
 from game.combat.entities.player import player as pl
 from game.gameHandler.shops.trader import trader as tradar
@@ -26,21 +26,60 @@ global player
 global roundCounter
 global manager
 global bossIndex
+global nagraAlive
+global killedNagra
 
 storyState  = 0
 combatState = 1
 
-def readSave():
-    with open('save.json','r') as file:
-        data = json.load(file)
-    return(data)
+noSaveData = {
+    "hp"          : 200,
+    "attack"      : 2,
+    "defence"     : 2,
+    "level"       : 1,
+    "gold"        : 100,
+    "maxHp"       : 20,
+    "xp"          : 0,
+    "kills"       : 0,
+    "baseDef"     : 2,
+    "baseATK"     : 2,
+    "inventory"   : [],
+    "round"       : 0,
+    "killedNagra" : False
+}# we must use ai formatting
 
-def savetoSave(element,newData):
-    with open('save.json','r') as file:
-        data = json.load(file)
-    data[element] = newData
-    with open('save.json','w') as file:
-        file.dump(data, file,indent=4)
+nagraAlive  = True
+killedNagra = False
+
+def readSave():
+    try:
+        with open('save.json', 'r') as file:
+            data = json.load(file)
+        for key, val in noSaveData.items():
+            if key not in data:
+                data[key] = val
+        return data
+    except (FileNotFoundError, json.JSONDecodeError):
+        return dict(noSaveData)
+
+def saveGame():
+    data = {
+        "hp"          : player.hp,
+        "attack"      : player.atk,
+        "defence"     : player.defense,
+        "level"       : player.level,
+        "gold"        : player.gold,
+        "maxHp"       : player.maxHp,
+        "xp"          : player.xp,
+        "kills"       : player.kills,
+        "baseDef"     : player.baseDef,
+        "baseATK"     : player.baseATK,
+        "inventory"   : player.inventory,
+        "round"       : roundCounter,
+        "killedNagra" : killedNagra
+    }# and stiuck with it because im good at consistency
+    with open('save.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
 def startDisplay():
     pygame.init()
@@ -55,15 +94,17 @@ def startDisplay():
     screen = pygame.display.set_mode((900, 600))
     clock = pygame.time.Clock()
 
-    global blueStop, shop, player, generatedOptions, trader, questNpc, roundCounter, manager, bossIndex
+    global blueStop, shop, player, generatedOptions, trader, questNpc, roundCounter, manager, bossIndex, killedNagra
 
-    player = pl(readSave())
+    save = readSave()
+    player = pl(save)
     shop = shoppersDrugMart(screen, player)
     trader = tradar(screen, player)
     questNpc = quest(screen, player)
     generatedOptions = False
-    roundCounter = 0
-    manager = combatManager(screen, player)
+    roundCounter = save["round"]
+    killedNagra = save["killedNagra"]
+    manager = combatManager(screen, player, killedNagra)
     bossIndex = 1
 
 def generatePromts():
@@ -97,11 +138,11 @@ def typeWrite(screen, text):
     if not hasattr(typeWrite, "index"):
         typeWrite.index = 0
         typeWrite.lastUpdate = pygame.time.get_ticks()
-        typeWrite.font = pygame.font.SysFont("Arial",24)
+        typeWrite.font = pygame.font.SysFont("Arial", 24)
         words = text.split(' ')
         lines = []
         currentLine = []
-        maxWidth = screen.get_width()-40
+        maxWidth = screen.get_width() - 40
 
         for word in words:
             testLine = ' '.join(currentLine + [word])
@@ -126,7 +167,7 @@ def typeWrite(screen, text):
         if charsToShow <= 0:
             break
         visibleText = line[:charsToShow]
-        surf= typeWrite.font.render(visibleText, True, const.white)
+        surf = typeWrite.font.render(visibleText, True, const.white)
         screen.blit(surf, (20, yOffset))
         charsToShow -= len(line) + 1
         yOffset += typeWrite.font.get_linesize()
@@ -146,8 +187,7 @@ def giveChestLoot():
 
 def generateNodeChoices(bossRound):
     if bossRound:
-        choices = ["boss","boss","boss"]
-        return choices
+        return ["boss", "boss", "boss"]
     else:
         while True:
             choices = random.choices(const.nodeChoice, k=3)
@@ -159,10 +199,11 @@ def generateNodeChoices(bossRound):
                 print(choices)
                 return choices
 
-def nextRound():
+def nextRound(incrementRound=True):
     global roundCounter, generatedOptions, rah, storyText, bossIndex
 
-    roundCounter += 1
+    if incrementRound:
+        roundCounter += 1
     screen.fill(const.black)
     resetTypeWriter()
     storyGenerated = generateStory().splitlines()
@@ -170,6 +211,9 @@ def nextRound():
     generatedOptions = True
     player.hp = player.maxHp
     print(f"player kills: {player.kills}")
+
+    saveGame()
+
     match roundCounter:
         case 10:
             rah = generateNodeChoices(True)
@@ -178,17 +222,18 @@ def nextRound():
             else:
                 bossIndex = 1
         case 20:
-            if player.kills >=20:
+            if player.kills >= 20:
                 bossIndex = 11
             else:
                 bossIndex = 2
             print("pharoh is here")
             rah = generateNodeChoices(True)
-
-        case _: rah = generateNodeChoices(False)
+        case _:
+            rah = generateNodeChoices(False)
 
 def startGame():
-    global enemyCount, bossIndex, toBeUsedEnemies
+    global enemyCount, bossIndex, toBeUsedEnemies, killedNagra
+
     print("started game")
     running = True
     state = storyState
@@ -197,7 +242,7 @@ def startGame():
     traderWasOpen = False
     questWasOpen = False
     toBeUsedEnemies = []
-    nextRound()
+    nextRound(roundCounter <= 0)
 
     while running:
         events = pygame.event.get()
@@ -205,7 +250,7 @@ def startGame():
             if event.type == pygame.QUIT:
                 running = False
 
-        deltaTime = clock.tick(const.fpsCap)/1000
+        deltaTime = clock.tick(const.fpsCap) / 1000
 
         if trader.active:
             traderWasOpen = True
@@ -231,11 +276,12 @@ def startGame():
             if shopWasOpen:
                 drawnNode = False
                 shopWasOpen = False
+
             if state == storyState:
                 finished = typeWrite(screen, storyText)
                 if finished:
                     if not drawnNode:
-                        nodes.initNodes(rah[0],rah[1],rah[2])
+                        nodes.initNodes(rah[0], rah[1], rah[2])
                         nodes.drawPath(screen)
                         nodes.putNodes(screen)
                         drawnNode = True
@@ -274,14 +320,14 @@ def startGame():
                                 pygame.display.flip()
                                 enemyCount = 1
                                 print(bossIndex)
-                                toBeUsedEnemies = [createEnemy(roundCounter,player.level,bossIndex)]
+                                toBeUsedEnemies = [createEnemy(roundCounter, player.level, bossIndex)]
                                 manager.startBattle(toBeUsedEnemies)
                                 goldCalculatable = True
                                 manager.soulMode = 1
                                 print("boss started")
                                 match bossIndex:
-                                    case 1: playboss1Music()
-                                    case 2: playboss2Music()
+                                    case 1:  playboss1Music()
+                                    case 2:  playboss2Music()
                                     case 10: playgenocideNAgra()
                                     case 11: playboss2Music()
 
@@ -289,7 +335,7 @@ def startGame():
                                 state = combatState
                                 screen.fill(const.black)
                                 pygame.display.flip()
-                                enemyCount = random.randint(1,3)
+                                enemyCount = random.randint(1, 3)
                                 toBeUsedEnemies = [createEnemy(roundCounter, player.level) for _ in range(enemyCount)]
                                 manager.startBattle(toBeUsedEnemies)
                                 goldCalculatable = True
@@ -303,22 +349,32 @@ def startGame():
 
                 if goldCalculatable:
                     goldCalculated = 0
-                    for i in range(0, len(manager.enemies)):
+                    for i in range(len(manager.enemies)):
                         try:
                             goldCalculated += manager.enemies[i].gold
                         except:
                             goldCalculated += manager.gold
                     goldCalculatable = False
                     print(f"calculated {goldCalculated} gold to add")
+
                 manager.update(deltaTime, events)
                 manager.draw()
 
                 if manager.battleOver:
                     stopAudio()
-                    if manager.victory:
+                    if manager.badEnding:
+                        print("bad ending triggered")
+                        running = False
+                    elif manager.goodEnding:
+                        print("good ending triggered")
+                        running = False
+                    elif manager.victory:
                         player.levelUp()
                         playYippie()
-                        print(enemyCount)
+                        if bossIndex in (1, 10):
+                            killedNagra = not manager.MERCY
+                            manager.killedNagra = killedNagra
+                            print(f"killedNagra: {killedNagra}")
                         manager.reset()
                         state = storyState
                         drawnNode = False
@@ -333,10 +389,23 @@ def startGame():
                         if player.hp <= 0:
                             print("reset hp")
                             player.hp = manager.hpSnapshot
+                        for e in toBeUsedEnemies:
+                            e.hp = e.maxHp
+                            e.alive = True
+                            if hasattr(e, "attackRoundIndex"):
+                                e.attackRoundIndex.clear()
+                        if bossIndex in (1, 2, 10, 11):
+                            match bossIndex:
+                                case 1:  playboss1Music()
+                                case 2:  playboss2Music()
+                                case 10: playgenocideNAgra()
+                                case 11: playboss2Music()
+                        else:
+                            playBattleMusic()
                         manager.startBattle(toBeUsedEnemies)
 
             if state == storyState:
-                roundSurf = pygame.font.SysFont("Arial",20).render(f"Round {roundCounter}",True,const.white)
+                roundSurf = pygame.font.SysFont("Arial", 20).render(f"Round {roundCounter}", True, const.white)
                 screen.blit(roundSurf, (780, 10))
 
         pygame.display.flip()

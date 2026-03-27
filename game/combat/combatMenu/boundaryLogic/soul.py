@@ -16,6 +16,8 @@ class soul:
         self.soulMode = soulMode
         self.prevSoulMode = soulMode
         self.shieldDir = 0
+        self.canJump = True
+        self.jumping = False
 
     def getShieldRect(self):
         if self.soulMode != const.soulModeGreen:
@@ -64,10 +66,22 @@ class soul:
                     dx -= 1
                 if key[pygame.K_RIGHT] or key[pygame.K_d]:
                     dx += 1
-                if key[pygame.K_UP] or key[pygame.K_w] and self.rect.bottom == boundary.bottom:
+
+                onGround = self.rect.bottom >= boundary.bottom
+                if onGround:
+                    self.canJump = True
+                    self.jumping = False
+
+
+                if (key[pygame.K_UP] or key[pygame.K_w]) and self.canJump:
                     dy -= 1
-                if key[pygame.K_DOWN] or key[pygame.K_s]:
-                    dy += 1
+                    self.jumping = True
+                    self.canJump = False
+                elif (key[pygame.K_UP] or key[pygame.K_w]) and self.jumping:
+                    dy -=1
+
+                if not (key[pygame.K_UP] or key[pygame.K_w]):
+                    self.jumping = False
             case _:
                 if key[pygame.K_LEFT] or key[pygame.K_a]:
                     dx -= 1

@@ -4,11 +4,11 @@ import const
 from game.combat.attacks.handlers.attackBase import attackBase
 
 class beamSpinner(attackBase):
-    damage = 3
+    damage = 2
     attackTimer = 6
     volley = 1
     numBeams = 8
-    spinSpeed = math.pi / 2
+    spinSpeed = math.pi / 6
     beamWidth = 14
     warningTime = 0.6
 

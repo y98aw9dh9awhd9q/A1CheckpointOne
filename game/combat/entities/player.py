@@ -15,6 +15,7 @@ class player(entitySuper.livingEntity):
         self.atk = saveData["attack"]
         self.LOVE = saveData["xp"]
         self.kills = saveData["kills"]
+        self.xp = 0
 
     def getAtk(self):
         return self.atk

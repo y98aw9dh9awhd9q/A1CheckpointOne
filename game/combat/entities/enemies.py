@@ -19,6 +19,7 @@ def cat(playerLevel=1):
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 0
+    e.isPharoh = False
     return e
 
 def cerealBowl(playerLevel=1):
@@ -28,6 +29,7 @@ def cerealBowl(playerLevel=1):
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 0
+    e.isPharoh = False
     return e
 
 def keyno(playerLevel=1):
@@ -37,6 +39,7 @@ def keyno(playerLevel=1):
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 1
+    e.isPharoh = False
     return e
 
 def rust(playerLevel=1):
@@ -44,6 +47,9 @@ def rust(playerLevel=1):
     e = enemy("Rust", hp, 5, 4, "rust.png", scale, 20)
     e.attacks = [orangeBeam]
     e.attackRoundIndex = {}
+    e.mercyable = False
+    e.mercyTurns = 0
+    e.isPharoh = False
     return e
 
 def worm(playerLevel=1):
@@ -51,24 +57,29 @@ def worm(playerLevel=1):
     e = enemy("Worm", hp, 6, 5, "worm.png", scale, 25)
     e.attacks = [blueBeam, orangeBeam]
     e.attackRoundIndex = {}
+    e.mercyable = False
+    e.mercyTurns = 0
+    e.isPharoh = False
     return e
 
 def circleAngel(playerLevel=1):
     hp = 50 + playerLevel * 3
     e = enemy("Circle Angel", hp, 7, 6, "circle angel thing.png", scale, 30)
-    e.attacks = [beamSpinnerCooler,beamSpinner]
+    e.attacks = [beamSpinnerCooler, beamSpinner]
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 2
+    e.isPharoh = False
     return e
 
 def nagraNotGeno(playerLevel=1):
-    hp = 180 + playerLevel * 2
-    e = enemy("NAGRA", hp, 5, 7, "nagraNotGeno.png", scale, 100)
+    hp = 100
+    e = enemy("NAGRA", hp, 5, 5, "nagraNotGeno.png", scale, 100)
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 10
+    e.isPharoh = False
     return e
 
 def nagraGeno(playerLevel=1):
@@ -77,6 +88,8 @@ def nagraGeno(playerLevel=1):
     e.attacks = [nagraISANGRY]
     e.attackRoundIndex = {}
     e.mercyable = False
+    e.mercyTurns = 0
+    e.isPharoh = False
     return e
 
 def pharoh(playerLevel=1):
@@ -84,7 +97,9 @@ def pharoh(playerLevel=1):
     e = enemy("PHAROH", hp, 10, 8, "pharoh.png", scale, 130)
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
-    e.mercyable = False
+    e.mercyable = True
+    e.mercyTurns = 1
+    e.isPharoh = True
     return e
 
 def pharohGeno(playerLevel=1):
@@ -93,6 +108,8 @@ def pharohGeno(playerLevel=1):
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
     e.mercyable = False
+    e.mercyTurns = 0
+    e.isPharoh = True
     return e
 
 roster = [cat, cerealBowl, keyno, circleAngel]
@@ -103,9 +120,8 @@ def createEnemy(roundNum, playerLevel, bossIndex=0):
         case 0:
             maxIndex = min(len(roster) - 1, roundNum // 3)
             fn = random.choice(roster[:maxIndex + 1])
-        case 1: fn = nagraNotGeno
-        case 2: fn = pharoh()
+        case 1:  fn = nagraNotGeno
+        case 2:  fn = pharoh
         case 10: fn = nagraGeno
         case 11: fn = pharohGeno
-    #fn = circleAngel
     return fn(playerLevel)
