@@ -204,7 +204,7 @@ class combatManager:
                         continue
                     if getattr(e, "mercyable", False) and self.turnsInBattle >= getattr(e, "mercyTurns", 0):
                         e.alive = False
-                        if getattr(e, "isPharoh", False):
+                        if getattr(e, "isPharoh", False) and not getattr(e,"isPharoh", None):
                             pharohSpared = True
 
                 if pharohSpared:
@@ -294,8 +294,9 @@ class combatManager:
             entity = self.enemies[self.targeted]
             if entity.alive:
                 atk = max(1, self.player.atk + random.randint(1, 3))
-                entity.takeDamage(atk + self.player.getAtk())
-                self.popups.append(damagePopup(positions[self.targeted], 40, atk, const.yellow))
+                entity.takeDamage(atk)
+                self.popups.append(damagePopup(positions[self.targeted], 40, atk
+                                               - max(1, self.player.atk - entity.defense), const.yellow))
 
             if all(not e.alive for e in self.enemies):
                 self.state = self.stateWin

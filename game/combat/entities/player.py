@@ -63,4 +63,6 @@ class player(entitySuper.livingEntity):
         self.level += 1
         self.maxHp = round(self.maxHp*1.1,2)
         self.baseATK = round(self.baseATK*1.1,2)
+        self.atk = round(self.atk*1.1,2)
         self.baseDef = round(self.baseDef*1.1,2)
+        self.defense = round(self.defense*1.1,2)

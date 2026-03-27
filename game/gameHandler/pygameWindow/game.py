@@ -33,7 +33,7 @@ storyState  = 0
 combatState = 1
 
 noSaveData = {
-    "hp"          : 200,
+    "hp"          : 20,
     "attack"      : 2,
     "defence"     : 2,
     "level"       : 1,
@@ -87,7 +87,7 @@ def startDisplay():
 
     try:
         pygame.mixer.init()
-    except Exception:
+    except:
         print("audio failed")
 
     global screen, clock
@@ -228,6 +228,9 @@ def nextRound(incrementRound=True):
                 bossIndex = 2
             print("pharoh is here")
             rah = generateNodeChoices(True)
+        case 21:
+            rah = generateNodeChoices(True)
+            bossIndex = 3
         case _:
             rah = generateNodeChoices(False)
 

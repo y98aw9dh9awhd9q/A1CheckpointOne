@@ -19,7 +19,6 @@ def cat(playerLevel=1):
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 0
-    e.isPharoh = False
     return e
 
 def cerealBowl(playerLevel=1):
@@ -83,8 +82,8 @@ def nagraNotGeno(playerLevel=1):
     return e
 
 def nagraGeno(playerLevel=1):
-    hp = 500 + playerLevel * 2
-    e = enemy("NAGRA >:(", hp, 8, 10, "nagraGeno.png", scale, 100)
+    hp = 250 + playerLevel * 2
+    e = enemy("NAGRA >:(", hp, 8, 6, "nagraGeno.png", scale, 100)
     e.attacks = [nagraISANGRY]
     e.attackRoundIndex = {}
     e.mercyable = False
@@ -93,7 +92,7 @@ def nagraGeno(playerLevel=1):
     return e
 
 def pharoh(playerLevel=1):
-    hp = 400 + playerLevel * 2
+    hp = 99999999
     e = enemy("PHAROH", hp, 10, 8, "pharoh.png", scale, 130)
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
@@ -103,13 +102,23 @@ def pharoh(playerLevel=1):
     return e
 
 def pharohGeno(playerLevel=1):
-    hp = 1 + playerLevel * 2
-    e = enemy("PHAROH", hp, 10, 0, "pharoh.png", scale, 130)
+    hp = 99999999
+    e = enemy("PHAROH", hp, 10, -99999999999999999, "pharoh.png", scale, 130)
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
     e.mercyable = False
     e.mercyTurns = 0
     e.isPharoh = True
+    return e
+
+def genoBoss(playerlevel = 20):
+    hp = 1500
+    e = enemy("willio", hp, 10, 10, "genoBoss.png", scale, 6767)
+    e.attacks = [nagraIsGrinch]
+    e.attackRoundIndex = {}
+    e.mercyable = False
+    e.mercyTurns = 0
+    e.isPharoh = False
     return e
 
 roster = [cat, cerealBowl, keyno, circleAngel]
@@ -124,4 +133,5 @@ def createEnemy(roundNum, playerLevel, bossIndex=0):
         case 2:  fn = pharoh
         case 10: fn = nagraGeno
         case 11: fn = pharohGeno
+        case 3: fn = genoBoss
     return fn(playerLevel)

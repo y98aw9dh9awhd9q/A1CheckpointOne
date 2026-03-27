@@ -21,11 +21,11 @@ class nagraISANGRY(attackBase):
 
         3: {"directions": [
             "u", "u", "u", "", "d", "d", "d", "", "l", "l", "l", "", "r", "r", "r","d","u","u","r","","d","u","l","R","d","r","l","u"
-        ], "speed": 120, "delay": 0.12},
+        ], "speed": 120, "delay": 0.22},
 
         4: {"directions": [
             "U", "U", "U", "d", "d", "d", "L", "L", "R", "R", "u", "u", "u", "D", "D","r","r","R","R","L","u","d"
-        ], "speed": 260, "delay": 0.11},
+        ], "speed": 140, "delay": 0.2},
 
         5: {"directions": [
             "u", "r", "d", "l", "u", "r", "d", "l",
@@ -46,63 +46,63 @@ class nagraISANGRY(attackBase):
             "u", "d", "u", "d", "u", "d", "u", "d",
             "l", "r", "l", "r", "l", "r", "l", "r",
             "u", "l", "d", "r", "u", "l", "d", "r"
-        ], "speed": 300, "delay": 0.11},
+        ], "speed": 230, "delay": 0.4},
 
         8: {"directions": [
             "U", "d", "U", "d", "U", "d", "L", "r", "L", "r", "D", "u", "D", "u",
             "u", "r", "d", "l", "u", "r", "d", "l"
-        ], "speed": 310, "delay": 0.11},
+        ], "speed": 210, "delay": 0.3},
 
         9: {"directions": [
             "u", "u", "u", "u", "", "d", "d", "d", "d",
             "l", "l", "l", "l", "", "r", "r", "r", "r",
             "u", "l", "d", "r", "u", "l", "d", "r"
-        ], "speed": 300, "delay": 0.11},
+        ], "speed": 200, "delay": 0.3},
 
         10: {"directions": [
             "U", "U", "d", "d", "L", "L", "r", "r",
             "u", "u", "D", "D", "l", "l", "R", "R",
             "u", "r", "d", "l", "U", "R", "D", "L"
-        ], "speed": 320, "delay": 0.11},
+        ], "speed": 220, "delay": 0.3},
 
         11: {"directions": [
             "u", "r", "u", "r", "d", "l", "d", "l",
             "U", "R", "D", "L", "u", "r", "d", "l",
             "u", "u", "l", "l", "d", "d", "r", "r"
-        ], "speed": 330, "delay": 0.11},
+        ], "speed": 230, "delay": 0.3},
 
         12: {"directions": [
             "u", "u", "u", "d", "d", "d",
             "U", "U", "U", "D", "D", "D",
             "l", "l", "r", "r", "L", "L", "R", "R",
             "u", "l", "d", "r", "u", "l", "d", "r"
-        ], "speed": 340, "delay": 0.10},
+        ], "speed": 240, "delay": 0.25},
 
         13: {"directions": [
             "u", "d", "u", "d", "l", "r", "l", "r",
             "U", "D", "U", "D", "L", "R", "L", "R",
             "u", "l", "d", "r", "u", "l", "d", "r"
-        ], "speed": 350, "delay": 0.10},
+        ], "speed": 250, "delay": 0.25},
 
         14: {"directions": [
             "U", "U", "U", "U", "d", "d", "d", "d",
             "L", "L", "L", "L", "r", "r", "r", "r",
             "u", "l", "d", "r", "u", "l", "d", "r"
-        ], "speed": 230, "delay": 0.32},
+        ], "speed": 230, "delay": 0.5},
 
         15: {"directions": [
             "u", "r", "d", "l", "u", "r", "d", "l",
             "U", "R", "D", "L", "U", "R", "D", "L",
             "u", "r", "d", "l",
             "u", "u", "l", "l", "d", "d", "r", "r"
-        ], "speed": 230, "delay": 0.18},
+        ], "speed": 230, "delay": 0.35},
 
         16: {"directions": [
             "U", "d", "U", "d", "L", "r", "L", "r",
             "D", "u", "D", "u", "R", "l", "R", "l",
             "U", "D", "L", "R",
             "u", "r", "d", "l", "u", "r", "d", "l"
-        ], "speed": 260, "delay": 0.22}
+        ], "speed": 260, "delay": 0.40}
     }
 
     def __init__(self, boundary, attacker, roundStore=None):
