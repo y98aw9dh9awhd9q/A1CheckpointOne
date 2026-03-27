@@ -2,6 +2,7 @@ import random
 import pygame
 import const
 from game.gameHandler.pygameWindow.soundManager import playVineBoom
+from game.endScreen import endScreenMain
 from game.combat.entities.enemyDrawer import enemyDrawer
 from game.combat.attacks.handlers.attackHandler import attackHandler
 
@@ -75,6 +76,7 @@ class combatManager:
         self.fontMed   = pygame.font.SysFont("Arial", 22, bold=True)
         self.fontSmall = pygame.font.SysFont("Arial", 16, bold=True)
         self.gold = 10
+        self.gameEnded = False
 
     def startBattle(self, enemies):
         self.enemies = enemies[:3]
@@ -204,12 +206,12 @@ class combatManager:
                         continue
                     if getattr(e, "mercyable", False) and self.turnsInBattle >= getattr(e, "mercyTurns", 0):
                         e.alive = False
-                        if getattr(e, "isPharoh", False) and not getattr(e,"isPharoh", None):
+                        if getattr(e, "isPharoh", False):
                             pharohSpared = True
 
                 if pharohSpared:
                     self.cutsceneTimer = 0.0
-                    if not self.killedNagra:
+                    if not self.killedNagra and self.player.kills == 0:
                         self.state = self.statePharohGoodEnd
                     else:
                         self.state = self.statePharohBadEnd
@@ -243,30 +245,17 @@ class combatManager:
 
     def drawCutscene(self, surf):
         surf.fill(const.black)
-        if self.state == self.statePharohGoodEnd:
-            lines = [
-                "HES HERE",
-                "MR NAGRA",
-                "good ending"
-            ]
-            col = const.yellow
-        else:
-            lines = [
-                "nagra is dead",
-                '"youre cooked"',
-                "bad ending",
-            ]
-            col = const.red
 
-        visibleLines = min(len(lines), max(1, int(self.cutsceneTimer / 0.8)))
-        y = 160
-        for line in lines[:visibleLines]:
-            s = self.fontMed.render(line, True, col)
-            surf.blit(s, (self.screenW // 2 - s.get_width() // 2, y))
-            y += s.get_height() + 18
-            playVineBoom()
+        if not self.gameEnded:
+            if self.state == self.statePharohGoodEnd:
+                endScreenMain.playGoodEnding()
+            else:
+                endScreenMain.playBadEnding()
+        self.gameEnded = True
+        #dont question it
+        #its better this way
 
-        if self.cutsceneTimer > 2.0:
+        if self.cutsceneTimer > 5.0:
             hint = self.fontSmall.render("z or enter to continue", True, const.white)
             surf.blit(hint, (self.screenW // 2 - hint.get_width() // 2, self.screenH - 40))
 

@@ -97,7 +97,7 @@ def pharoh(playerLevel=1):
     e.attacks = [nagraIsGrinch]
     e.attackRoundIndex = {}
     e.mercyable = True
-    e.mercyTurns = 1
+    e.mercyTurns = 0
     e.isPharoh = True
     return e
 

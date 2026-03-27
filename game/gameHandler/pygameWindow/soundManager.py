@@ -9,6 +9,7 @@ yippie = pygame.mixer.Sound(os.path.join(const.baseDir, "assets", "audio", "sfx"
 boss1Music = pygame.mixer.Sound(os.path.join(const.baseDir, "assets", "audio", "music", "boss1Music.mp3"))
 boss2Music = pygame.mixer.Sound(os.path.join(const.baseDir, "assets", "audio", "music", "boss2Music.mp3"))
 genocideNAgra = pygame.mixer.Sound(os.path.join(const.baseDir, "assets", "audio", "music", "genocideNAgra.mp3"))
+genoBossMusic = pygame.mixer.Sound(os.path.join(const.baseDir, "assets", "audio", "music", "genoBossMusic.mp3"))
 def playVineBoom():
     vineBoom.play()
 
@@ -37,3 +38,6 @@ def playboss2Music():
 
 def playgenocideNAgra():
     genocideNAgra.play()
+
+def playGenoBoss():
+    genoBossMusic.play()

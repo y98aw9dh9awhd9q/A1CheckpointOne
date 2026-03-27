@@ -6,7 +6,7 @@ import json
 
 from game.gameHandler.pygameWindow import nodes
 from ai.chat import generateText
-from game.gameHandler.pygameWindow.soundManager import playVineBoom, playBattleMusic, stopAudio, playYippie, playboss1Music, playboss2Music, playgenocideNAgra
+from game.gameHandler.pygameWindow.soundManager import playVineBoom, playBattleMusic, stopAudio, playYippie, playboss1Music, playboss2Music, playgenocideNAgra,playGenoBoss
 from game.gameHandler.shops.shop import shop as shoppersDrugMart
 from game.combat.entities.player import player as pl
 from game.gameHandler.shops.trader import trader as tradar
@@ -222,7 +222,7 @@ def nextRound(incrementRound=True):
             else:
                 bossIndex = 1
         case 20:
-            if player.kills >= 20:
+            if player.kills >= 20 and killedNagra:
                 bossIndex = 11
             else:
                 bossIndex = 2
@@ -333,6 +333,7 @@ def startGame():
                                     case 2:  playboss2Music()
                                     case 10: playgenocideNAgra()
                                     case 11: playboss2Music()
+                                    case 3: playGenoBoss()
 
                             case _:
                                 state = combatState
@@ -403,6 +404,7 @@ def startGame():
                                 case 2:  playboss2Music()
                                 case 10: playgenocideNAgra()
                                 case 11: playboss2Music()
+                                case 3: playGenoBoss()
                         else:
                             playBattleMusic()
                         manager.startBattle(toBeUsedEnemies)
