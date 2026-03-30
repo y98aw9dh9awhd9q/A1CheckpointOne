@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ca74400-b83f-4b65-b1c3-cbc63b6d81dc" name="Changes" comment="required librrararys&#10;torch&#10;pygame CE&#10;python 3.9&#10;mr nnnnnnnnnnnnnaaaaaaaaagggggggggggrrrrrrrrrraaaaaaaaaaaaaaaa">
-      <change afterPath="$PROJECT_DIR$/chkSum.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/beamOfPharoh.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOriginalAttackOne.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOriginalAttackThree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOringinalAttackTwo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chkSum.py" beforeDir="false" afterPath="$PROJECT_DIR$/chkSum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/beamSpinner.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/beamSpinner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/catClaw.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/catClaw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/cerealRain.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/cerealRain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/handlers/attackHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/handlers/attackHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/keyspinnah.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/keyspinnah.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/nagraISANGRY.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/nagra/nagraISANGRY.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/nagraIsGrinch.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/nagra/nagraIsGrinch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/entities/enemies.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/entities/enemies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/gameHandler/pygameWindow/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/pygameWindow/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +88,13 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks" />
+      <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks\nagra" />
+      <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks\foddler" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonProject4" />
@@ -102,34 +120,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.game" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.game" />
     </list>
     <recent_temporary>
       <list>
@@ -196,7 +189,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AssignmentOne$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1773859030151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/combat/entities" />
     <SUITE FILE_PATH="coverage/AssignmentOne$game.coverage" NAME="game Coverage Results" MODIFIED="1773859041233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/gameHandler/pygameWindow" />
-    <SUITE FILE_PATH="coverage/A1CheckpointOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774894079679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A1CheckpointOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774907656550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AssignmentOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774050831842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MrNagraAssignmentOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774619596446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

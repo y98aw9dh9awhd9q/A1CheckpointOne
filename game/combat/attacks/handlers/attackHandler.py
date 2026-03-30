@@ -1,7 +1,7 @@
 import const
-from game.combat.attacks.nagraISANGRY import nagraISANGRY
+from game.combat.attacks.nagra.nagraISANGRY import nagraISANGRY
 from game.combat.combatMenu.boundaryLogic.boundary import boundaryLogic
-from game.combat.attacks.nagraIsGrinch import nagraIsGrinch
+from game.combat.attacks.nagra.nagraIsGrinch import nagraIsGrinch
 #bro so special he needs to be imported
 class attackHandler:
     def __init__(self, screen, player):

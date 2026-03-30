@@ -15,6 +15,7 @@ from game.gameHandler.shops.trader import trader as tradar
 from game.gameHandler.shops.quest import quest
 from game.combat.combatManager import combatManager
 from game.combat.entities.enemies import createEnemy
+from cryptography.fernet import Fernet
 
 global screen
 global clock
@@ -46,7 +47,7 @@ noSaveData = {
     "baseDef"     : 2,
     "baseATK"     : 2,
     "inventory"   : [],
-    "round"       : 0,
+    "round"       : 20,
     "killedNagra" : False,
     "chkSum" : ""
 }# we must use ai formatting
@@ -55,20 +56,18 @@ nagraAlive  = True
 killedNagra = False
 
 def readSave():
-
     try:
-        with open('save.json', 'r') as file:
-            data = json.load(file)
+        data = chkSum.decryptSave(open('save.json').read())
         for key, val in noSaveData.items():
             if key not in data:
                 data[key] = val
         chkSum.checkCheckSum()
         return data
-    except (FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, json.JSONDecodeError, Exception):
         print("save error")
         return dict(noSaveData)
 
-def saveGame(chkSum = ""):
+def saveGame():
     data = {
         "hp"          : player.hp,
         "attack"      : player.atk,
@@ -83,10 +82,15 @@ def saveGame(chkSum = ""):
         "inventory"   : player.inventory,
         "round"       : roundCounter,
         "killedNagra" : killedNagra,
-        "chkSum"      : chkSum
-    }# and stiuck with it because im good at consistency
+        "chkSum"      : ""
+    }#and stick with it
     with open('save.json', 'w') as file:
-        json.dump(data, file, indent=4)
+        file.write(chkSum.encryptSave(data))
+
+    data["chkSum"] = chkSum.chkSumGen()
+    with open('save.json', 'w') as file:
+        file.write(chkSum.encryptSave(data))
+
 
 def startDisplay():
     pygame.init()
@@ -101,7 +105,7 @@ def startDisplay():
     screen = pygame.display.set_mode((900, 600))
     clock = pygame.time.Clock()
 
-    global blueStop, shop, player, generatedOptions, trader, questNpc, roundCounter, manager, bossIndex, killedNagra
+    global shop, player, generatedOptions, trader, questNpc, roundCounter, manager, bossIndex, killedNagra
 
     save = readSave()
     player = pl(save)
@@ -219,13 +223,7 @@ def nextRound(incrementRound=True):
     generatedOptions = True
     player.hp = player.maxHp
     print(f"player kills: {player.kills}")
-    try:
-        checkSum = chkSum.chkSumGen()
-    except:
-        print("chksum failed")
-        checkSum = ""
-
-    saveGame(checkSum)
+    saveGame()
 
     match roundCounter:
         case 10:
