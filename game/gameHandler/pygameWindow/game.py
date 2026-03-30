@@ -1,6 +1,8 @@
 import os
 import random
 import pygame
+
+import chkSum
 import const
 import json
 
@@ -45,24 +47,28 @@ noSaveData = {
     "baseATK"     : 2,
     "inventory"   : [],
     "round"       : 0,
-    "killedNagra" : False
+    "killedNagra" : False,
+    "chkSum" : ""
 }# we must use ai formatting
 
 nagraAlive  = True
 killedNagra = False
 
 def readSave():
+
     try:
         with open('save.json', 'r') as file:
             data = json.load(file)
         for key, val in noSaveData.items():
             if key not in data:
                 data[key] = val
+        chkSum.checkCheckSum()
         return data
     except (FileNotFoundError, json.JSONDecodeError):
+        print("save error")
         return dict(noSaveData)
 
-def saveGame():
+def saveGame(chkSum = ""):
     data = {
         "hp"          : player.hp,
         "attack"      : player.atk,
@@ -76,7 +82,8 @@ def saveGame():
         "baseATK"     : player.baseATK,
         "inventory"   : player.inventory,
         "round"       : roundCounter,
-        "killedNagra" : killedNagra
+        "killedNagra" : killedNagra,
+        "chkSum"      : chkSum
     }# and stiuck with it because im good at consistency
     with open('save.json', 'w') as file:
         json.dump(data, file, indent=4)
@@ -106,6 +113,7 @@ def startDisplay():
     killedNagra = save["killedNagra"]
     manager = combatManager(screen, player, killedNagra)
     bossIndex = 1
+
 
 def generatePromts():
     global prompts
@@ -211,8 +219,13 @@ def nextRound(incrementRound=True):
     generatedOptions = True
     player.hp = player.maxHp
     print(f"player kills: {player.kills}")
+    try:
+        checkSum = chkSum.chkSumGen()
+    except:
+        print("chksum failed")
+        checkSum = ""
 
-    saveGame()
+    saveGame(checkSum)
 
     match roundCounter:
         case 10:
