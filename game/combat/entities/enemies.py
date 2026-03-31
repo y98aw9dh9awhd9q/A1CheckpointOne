@@ -103,7 +103,7 @@ def pharoh(playerLevel=1):
                  totallyOriginalAttackThree.totallyOriginalAttackThree]
     e.attackRoundIndex = {}
     e.mercyable = True
-    e.mercyTurns = 10
+    e.mercyTurns = 15
     e.isPharoh = True
     return e
 

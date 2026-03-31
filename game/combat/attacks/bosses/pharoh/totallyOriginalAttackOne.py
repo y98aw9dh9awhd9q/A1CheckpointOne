@@ -4,7 +4,7 @@ import random
 import const
 from game.combat.attacks.handlers.attackBase import attackBase
 
-class totallyOriginalAttackOneBuffed(attackBase):
+class totallyOriginalAttackOne(attackBase):
     attackTimer = 6.0
     volley = 1
 

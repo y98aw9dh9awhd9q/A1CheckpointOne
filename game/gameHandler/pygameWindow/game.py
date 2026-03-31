@@ -47,7 +47,7 @@ noSaveData = {
     "baseDef"     : 2,
     "baseATK"     : 2,
     "inventory"   : [],
-    "round"       : 0,
+    "round"       : 20,
     "killedNagra" : False,
     "chkSum" : ""
 }# we must use ai formatting
