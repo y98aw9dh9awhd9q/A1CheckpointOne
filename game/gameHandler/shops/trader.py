@@ -5,14 +5,14 @@ from game.gameHandler.pygameWindow.soundManager import playVineBoom
 
 class trader:
     def __init__(self, screen, player):
-        self.screen = screen
-        self.player = player
-        self.font = pygame.font.SysFont("Arial", 28)
-        self.smallFont = pygame.font.SysFont("Arial", 20)
-        self.itemRects = {}
+        self.screen     = screen
+        self.player     = player
+        self.font       = pygame.font.SysFont("Arial", 28)
+        self.smallFont  = pygame.font.SysFont("Arial", 20)
+        self.itemRects  = {}
         self.equipRects = {}
-        self.exitRect = None
-        self.active = False
+        self.exitRect   = None
+        self.active     = False
 
     def open(self):
         self.active = True

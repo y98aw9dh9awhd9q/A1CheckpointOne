@@ -1,6 +1,8 @@
 import pygame
 import os
 import math
+
+import const
 from const import baseDir
 from game.gameHandler.pygameWindow.soundManager import playVineBoom
 
@@ -34,28 +36,28 @@ def drawCentered(screen, img, x, y):
     screen.blit(img, rect)
 
 def playGoodEnding():
-    screen = pygame.display.set_mode((900, 600))
-    clock = pygame.time.Clock()
-    assets = loadAssets()
+    screen        = pygame.display.set_mode((900, 600))
+    clock         = pygame.time.Clock()
+    assets        = loadAssets()
     width, height = screen.get_size()
-    pharoh = assets["pharoh"]
-    nagra = assets["nagra"]
-    geno = assets["geno"]
+    pharoh        = assets["pharoh"]
+    nagra         = assets["nagra"]
+    geno          = assets["geno"]
 
-    leftX = width // 2 - 200
-    rightX = width // 2 + 200
-    centerY = height // 2
+    leftX         = width // 2 - 200
+    rightX        = width // 2 + 200
+    centerY       = height // 2
 
-    timer = 0
-    state = 0
-    angle = 0
-    boom1 = False
-    boom2 = False
+    timer         = 0
+    state         = 0
+    angle         = 0
+    boom1         = False
+    boom2         = False
 
     while True:
-        dt = clock.tick(60)
+        dt     = clock.tick(60)
         timer += dt
-        screen.fill((0, 0, 0))
+        screen.fill(const.white)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -63,16 +65,16 @@ def playGoodEnding():
 
         if state == 0:
             drawCentered(screen, pharoh, rightX, centerY)
-            if timer > 800:
+            if timer  > 800:
                 state = 1
                 timer = 0
 
         elif state == 1:
             drawCentered(screen, pharoh, rightX, centerY)
             drawCentered(screen, nagra, leftX, centerY)
-            if timer > 800:
-                state = 2
-                timer = 0
+            if timer      > 800:
+                state     = 2
+                timer     = 0
                 if not boom1:
                     playVineBoom()
                     boom1 = True
@@ -80,17 +82,17 @@ def playGoodEnding():
         elif state == 2:
             drawCentered(screen, pharoh, rightX, centerY)
             drawCentered(screen, geno, leftX, centerY)
-            if timer > 600:
+            if timer  > 600:
                 state = 3
                 timer = 0
 
-        elif state == 3:
-            angle += 8
-            scale = 1 + abs(math.sin(timer * 0.007)) * 2
+        elif state      == 3:
+            angle       += 8
+            scale       = 1 + abs(math.sin(timer * 0.007)) * 2
             transformed = pygame.transform.rotozoom(geno, angle, scale)
             drawCentered(screen, pharoh, rightX, centerY)
             drawCentered(screen, transformed, leftX, centerY)
-            if timer > 1500:
+            if timer  > 1500:
                 state = 4
                 timer = 0
 

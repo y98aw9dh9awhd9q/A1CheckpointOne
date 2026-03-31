@@ -6,8 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="9ca74400-b83f-4b65-b1c3-cbc63b6d81dc" name="Changes" comment="chksum">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/entities/enemies.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/entities/enemies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/const.py" beforeDir="false" afterPath="$PROJECT_DIR$/const.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/endScreen/endScreenMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/endScreen/endScreenMain.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/gameHandler/pygameWindow/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/pygameWindow/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/gameHandler/pygameWindow/nodes.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/pygameWindow/nodes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/gameHandler/pygameWindow/soundManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/pygameWindow/soundManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/gameHandler/shops/quest.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/shops/quest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/gameHandler/shops/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/shops/shop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/gameHandler/shops/trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/shops/trader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +48,12 @@
     &quot;assignee&quot;: &quot;y98aw9dh9awhd9q&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/y98aw9dh9awhd9q/A1CheckpointOne.git",
-    "accountId": "555a1fdf-6683-4b49-8e8b-f96a4c6d99e0"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/y98aw9dh9awhd9q/A1CheckpointOne.git&quot;,
+    &quot;accountId&quot;: &quot;555a1fdf-6683-4b49-8e8b-f96a4c6d99e0&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -184,7 +191,9 @@
       <workItem from="1774635431434" duration="94000" />
       <workItem from="1774890463757" duration="3610000" />
       <workItem from="1774922822561" duration="3293000" />
-      <workItem from="1774969467603" duration="364000" />
+      <workItem from="1774969467603" duration="677000" />
+      <workItem from="1774970774710" duration="51000" />
+      <workItem from="1774976999056" duration="487000" />
     </task>
     <task id="LOCAL-00002" summary="required librrararys&#10;torch&#10;pygame CE&#10;python 3.9&#10;mr nnnnnnnnnnnnnaaaaaaaaagggggggggggrrrrrrrrrraaaaaaaaaaaaaaaa">
       <option name="closed" value="true" />
@@ -210,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774968183176</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="chksum">
+      <option name="closed" value="true" />
+      <created>1774970102993</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774970102993</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +243,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AssignmentOne$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1773859030151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/combat/entities" />
     <SUITE FILE_PATH="coverage/AssignmentOne$game.coverage" NAME="game Coverage Results" MODIFIED="1773859041233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/gameHandler/pygameWindow" />
-    <SUITE FILE_PATH="coverage/A1CheckpointOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774968024980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A1CheckpointOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774970782031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AssignmentOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774050831842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MrNagraAssignmentOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774619596446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

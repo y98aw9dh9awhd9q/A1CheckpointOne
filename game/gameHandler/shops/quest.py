@@ -6,15 +6,15 @@ from game.gameHandler.pygameWindow.soundManager import playVineBoom
 
 class quest:
     def __init__(self, screen, player):
-        self.screen = screen
-        self.player = player
-        self.font = pygame.font.SysFont("Arial", 28)
-        self.smallFont = pygame.font.SysFont("Arial", 20)
-        self.active = False
-        self.acceptRect = None
-        self.exitRect = None
+        self.screen       = screen
+        self.player       = player
+        self.font         = pygame.font.SysFont("Arial", 28)
+        self.smallFont    = pygame.font.SysFont("Arial", 20)
+        self.active       = False
+        self.acceptRect   = None
+        self.exitRect     = None
         self.requiredItem = None
-        self.rewardItem = None
+        self.rewardItem   = None
 
     def open(self):
         self.active = True
@@ -24,9 +24,9 @@ class quest:
         self.active = False
 
     def generateQuest(self):
-        items = list(const.shopItems.values())
+        items             = list(const.shopItems.values())
         self.requiredItem = random.choice(items)
-        self.rewardItem = random.choice(items)
+        self.rewardItem   = random.choice(items)
 
     def update(self, events):
         if not self.active:
@@ -34,7 +34,7 @@ class quest:
 
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
+                pos        = pygame.mouse.get_pos()
 
                 if self.acceptRect and self.acceptRect.collidepoint(pos):
                     for item in self.player.inventory:

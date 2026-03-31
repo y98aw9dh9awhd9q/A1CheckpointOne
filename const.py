@@ -1,40 +1,40 @@
-shopNode = "shop"
-combatNode = "combat"
-questNode = "quest"
-traderNode = "trader"
-bossNode = "boss"
-black = (0,0,0)
-white = (255,255,255)
-red = (255,0,0)
-green = (0,255,0)
-blue = (0,0,255)
-yellow = (255,255,0)
-gray = (55,55,55)
-orange = (255,255,0)
-soulModeRed = 0
+shopNode      = "shop"
+combatNode    = "combat"
+questNode     = "quest"
+traderNode    = "trader"
+bossNode      = "boss"
+black         = (0,0,0)
+white         = (255,255,255)
+red           = (255,0,0)
+green         = (0,255,0)
+blue          = (0,0,255)
+yellow        = (255,255,0)
+gray          = (55,55,55)
+orange        = (255,255,0)
+soulModeRed   = 0
 soulModeGreen = 1
-soulModeBlue = 2
+soulModeBlue  = 2
 
 labels = {
-    shopNode: "Shop",
-    combatNode: "Combat",
-    questNode: "Quest",
-    traderNode: "Trader",
-    bossNode: "Boss",
+    shopNode     : "Shop"   ,
+    combatNode   : "Combat" ,
+    questNode    : "Quest"  ,
+    traderNode   : "Trader" ,
+    bossNode     : "Boss"   ,
 }
 
 descriptions = {
-    shopNode: "buy stuff from shop",
-    combatNode: "fight enemy",
-    questNode: "accept quest?",
-    traderNode: "buy special stuff",
-    bossNode: "WE ARE COOKING",
+    shopNode     : "buy stuff from shop" ,
+    combatNode   : "fight enemy"         ,
+    questNode    : "accept quest?"       ,
+    traderNode   : "buy special stuff"   ,
+    bossNode     : "WE ARE COOKING"      ,
 }
 
 fpsCap = 60
 
 import os
-baseDir = os.path.dirname(os.path.abspath(__file__))
+baseDir   = os.path.dirname(os.path.abspath(__file__))
 playerDir = os.path.join(baseDir, "assets","pictures", "player.png")
 
 
