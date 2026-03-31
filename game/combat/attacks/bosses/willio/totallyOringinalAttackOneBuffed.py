@@ -1,34 +1,36 @@
 import pygame
 import math
+import random
 import const
 from game.combat.attacks.handlers.attackBase import attackBase
 
-class totallyOriginalAttackOne(attackBase):
+class totallyOriginalAttackOneBuffed(attackBase):
     attackTimer = 6.0
     volley = 1
+    circleRadius = 60
 
-    def fireVolley(self):
-        box = self.boundary.getRect()
-        dirs = [
-            (0, -1), (0, 1), (1, 0), (-1, 0),
-            (0.707, -0.707), (-0.707, -0.707),
-            (0.707, 0.707), (-0.707, 0.707),
-        ]
-        for i, (dx, dy) in enumerate(dirs):
-            kx = box.centerx + dx * (box.width)
-            ky = box.centery + dy * (box.height)
-            self.bullets.append(self.knife(kx, ky, dx, dy, i * 0.5))
-        self.volleysFired += 1
-        self.volleyCooldown = 9999
+    def start(self):
+        super().start()
+        self.timer = 0.0
+        self.box = None
+        self.bullets = []
+        self.volleysFired = 0
+        self.volleyCooldown = 0.0
+        self.circleAngle = 0.0
+        self.circleTarget = (0, 0)
+        self.circlePos = None
 
     def update(self, dt, box):
         if not self.running:
             return
+
         self.box = box
         self.timer += dt
         self.volleyCooldown -= dt
+        self.circleAngle += 0.5 * dt
+        self.updateCircleTarget(dt)
 
-        if self.volleyCooldown <= 0 and self.volleysFired < self.volley:
+        if self.circlePos is not None and self.volleyCooldown <= 0 and self.volleysFired < self.volley:
             self.fireVolley()
 
         soul = self.boundary.player
@@ -40,7 +42,59 @@ class totallyOriginalAttackOne(attackBase):
             self.done = True
             self.running = False
 
+    def updateCircleTarget(self, dt):
+        player = self.boundary.player
+
+        if self.circlePos is None:
+            self.circlePos = [
+                player.rect.centerx,
+                player.rect.centery
+            ]
+
+        if not self.circleTarget or random.random() < 0.01:
+            radius = 140
+            self.circleTarget = (
+                player.rect.centerx + random.uniform(-radius, radius),
+                player.rect.centery + random.uniform(-radius, radius)
+            )
+
+        cx, cy = self.circlePos
+        tx, ty = self.circleTarget
+        dx = tx - cx
+        dy = ty - cy
+        dist = math.hypot(dx, dy)
+
+        if dist > 1:
+            speed = 80
+            self.circlePos[0] += (dx / dist) * speed * dt
+            self.circlePos[1] += (dy / dist) * speed * dt
+
+    def fireVolley(self):
+        cx = self.circlePos[0]
+        cy = self.circlePos[1]
+
+        dirs = [
+            (1, 0), (-1, 0),
+            (0, 1), (0, -1),
+            (0.707, 0.707), (-0.707, 0.707),
+            (0.707, -0.707), (-0.707, -0.707),
+        ]
+
+        for i, (dx, dy) in enumerate(dirs):
+            self.bullets.append(self.knife(cx, cy, dx, dy, i * 0.5))
+
+        self.volleysFired += 1
+        self.volleyCooldown = 9999
+
     def checkHit(self, soul):
+        if self.circlePos is not None:
+            cx, cy = self.circlePos
+            px, py = soul.rect.centerx, soul.rect.centery
+            dist = math.hypot(px - cx, py - cy)
+
+            if dist > self.circleRadius:
+                return True
+
         for b in self.bullets:
             if not b.alive:
                 continue
@@ -49,6 +103,21 @@ class totallyOriginalAttackOne(attackBase):
             if b.sweptCollides(soul.rect):
                 return True
         return False
+
+    def draw(self, screen):
+        if not self.running or self.circlePos is None:
+            return
+
+        pygame.draw.circle(
+            screen,
+            const.white,
+            (int(self.circlePos[0]), int(self.circlePos[1])),
+            self.circleRadius,
+            3
+        )
+
+        for b in self.bullets:
+            b.draw(screen)
 
     class knife:
         speed = 900

@@ -15,7 +15,7 @@ from game.gameHandler.shops.trader import trader as tradar
 from game.gameHandler.shops.quest import quest
 from game.combat.combatManager import combatManager
 from game.combat.entities.enemies import createEnemy
-from cryptography.fernet import Fernet
+from game.endScreen.endScreenMain import playGenoEnding
 
 global screen
 global clock
@@ -47,13 +47,14 @@ noSaveData = {
     "baseDef"     : 2,
     "baseATK"     : 2,
     "inventory"   : [],
-    "round"       : 20,
+    "round"       : 0,
     "killedNagra" : False,
     "chkSum" : ""
 }# we must use ai formatting
 
 nagraAlive  = True
 killedNagra = False
+running = True
 
 def readSave():
     try:
@@ -212,7 +213,7 @@ def generateNodeChoices(bossRound):
                 return choices
 
 def nextRound(incrementRound=True):
-    global roundCounter, generatedOptions, rah, storyText, bossIndex
+    global roundCounter, generatedOptions, rah, storyText, bossIndex, running
 
     if incrementRound:
         roundCounter += 1
@@ -242,6 +243,9 @@ def nextRound(incrementRound=True):
         case 21:
             rah = generateNodeChoices(True)
             bossIndex = 3
+        case 22:
+            if(playGenoEnding()):
+                running = False
         case _:
             rah = generateNodeChoices(False)
 
@@ -249,7 +253,6 @@ def startGame():
     global enemyCount, bossIndex, toBeUsedEnemies, killedNagra
 
     print("started game")
-    running = True
     state = storyState
     drawnNode = False
     shopWasOpen = False
@@ -257,6 +260,7 @@ def startGame():
     questWasOpen = False
     toBeUsedEnemies = []
     nextRound(roundCounter <= 0)
+    global running
 
     while running:
         events = pygame.event.get()

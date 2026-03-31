@@ -1,8 +1,7 @@
 import random
 
-from game.combat.attacks.nagra.nagraISANGRY import nagraISANGRY
-from game.combat.attacks.nagra.nagraIsGrinch import nagraIsGrinch
-from game.combat.attacks.pharoh.totallyOringinalAttackTwo import totallyOriginalAttackTwo
+from game.combat.attacks.bosses.nagra.nagraISANGRY import nagraISANGRY
+from game.combat.attacks.bosses.nagra.nagraIsGrinch import nagraIsGrinch
 from game.combat.entities.enemy import enemy
 from game.combat.attacks.blueBeam import blueBeam
 from game.combat.attacks.orangeBeam import orangeBeam
@@ -10,7 +9,8 @@ from game.combat.attacks.foddler.catClaw import catClaw
 from game.combat.attacks.foddler.cerealRain import cerealRain
 from game.combat.attacks.foddler.keyspinnah import keySpinnah
 from game.combat.attacks.foddler.beamSpinner import beamSpinner, beamSpinnerCooler
-from game.combat.attacks.pharoh import beamOfPharoh,totallyOriginalAttackOne,totallyOringinalAttackTwo,totallyOriginalAttackThree
+from game.combat.attacks.bosses.pharoh import totallyOriginalAttackThree, beamOfPharoh, totallyOriginalAttackOne,totallyOringinalAttackTwo
+from game.combat.attacks.bosses.willio import totallyOringinalAttackOneBuffed,beamSpinnerReprise,keyspinnahReprise,borrowedAttack,beamSpinnerButGravity
 
 scale = (120, 120)
 
@@ -95,8 +95,12 @@ def nagraGeno(playerLevel=1):
 
 def pharoh(playerLevel=1):
     hp = 99999999
-    e = enemy("PHAROH", hp, 10, 8, "pharoh.png", scale, 130)
-    e.attacks = [beamOfPharoh.beamOfPharaoh,totallyOriginalAttackTwo,totallyOriginalAttackOne.totallyOriginalAttackOne,totallyOriginalAttackThree.totallyOriginalAttackThree]
+    e = enemy("PHAROH", hp, 5, 8, "pharoh.png", scale, 130)
+    e.attacks = [
+                beamOfPharoh.beamOfPharaoh,
+                 totallyOringinalAttackTwo.totallyOriginalAttackTwo,
+                 totallyOriginalAttackOne.totallyOriginalAttackOne,
+                 totallyOriginalAttackThree.totallyOriginalAttackThree]
     e.attackRoundIndex = {}
     e.mercyable = True
     e.mercyTurns = 10
@@ -115,8 +119,15 @@ def pharohGeno(playerLevel=1):
 
 def genoBoss(playerlevel = 20):
     hp = 1500
-    e = enemy("willio", hp, 20, 10, "genoBoss.png", scale, 6767)
-    e.attacks = [nagraIsGrinch]
+    e = enemy("willio", hp, 10, 10, "genoBoss.png", scale, 6767)
+    e.attacks = [
+        totallyOringinalAttackOneBuffed.totallyOriginalAttackOneBuffed,
+        beamSpinnerReprise.beamSpinnerReprise,
+        keyspinnahReprise.keySpinnahReprise,
+        borrowedAttack.borrowedAttack,
+        nagraISANGRY,
+        beamSpinnerButGravity.beamSpinnerCoolerGravity
+                 ]
     e.attackRoundIndex = {}
     e.mercyable = False
     e.mercyTurns = 0

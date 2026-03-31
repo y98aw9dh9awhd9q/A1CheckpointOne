@@ -4,21 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ca74400-b83f-4b65-b1c3-cbc63b6d81dc" name="Changes" comment="required librrararys&#10;torch&#10;pygame CE&#10;python 3.9&#10;mr nnnnnnnnnnnnnaaaaaaaaagggggggggggrrrrrrrrrraaaaaaaaaaaaaaaa">
-      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/beamOfPharoh.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOriginalAttackOne.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOriginalAttackThree.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOringinalAttackTwo.py" afterDir="false" />
+    <list default="true" id="9ca74400-b83f-4b65-b1c3-cbc63b6d81dc" name="Changes" comment="too hard">
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/willio/beamSpinnerButGravity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/willio/beamSpinnerReprise.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/willio/borrowedAttack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/willio/keyspinnahReprise.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/willio/totallyOringinalAttackOneBuffed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chkSum.py" beforeDir="false" afterPath="$PROJECT_DIR$/chkSum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/attacks/beamSpinner.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/beamSpinner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/attacks/catClaw.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/catClaw.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/attacks/cerealRain.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/cerealRain.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/combat/attacks/handlers/attackHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/handlers/attackHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/attacks/keyspinnah.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/foddler/keyspinnah.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/attacks/nagraISANGRY.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/nagra/nagraISANGRY.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/combat/attacks/nagraIsGrinch.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/nagra/nagraIsGrinch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/nagra/nagraISANGRY.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/nagra/nagraISANGRY.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/nagra/nagraIsGrinch.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/nagra/nagraIsGrinch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/pharoh/beamOfPharoh.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/pharoh/beamOfPharoh.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOriginalAttackOne.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/pharoh/totallyOriginalAttackOne.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOriginalAttackThree.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/pharoh/totallyOriginalAttackThree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/combat/attacks/pharoh/totallyOringinalAttackTwo.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/attacks/bosses/pharoh/totallyOringinalAttackTwo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/combat/entities/enemies.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/combat/entities/enemies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/endScreen/endScreenMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/endScreen/endScreenMain.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/gameHandler/pygameWindow/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/gameHandler/pygameWindow/game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,12 +54,12 @@
     &quot;assignee&quot;: &quot;y98aw9dh9awhd9q&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/y98aw9dh9awhd9q/A1CheckpointOne.git&quot;,
-    &quot;accountId&quot;: &quot;555a1fdf-6683-4b49-8e8b-f96a4c6d99e0&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/y98aw9dh9awhd9q/A1CheckpointOne.git",
+    "accountId": "a1b8d3ff-480d-482f-b723-59d8ca096309"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -67,29 +68,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.enemies.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.enemies.executor": "Run",
+    "Python.game.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/benbe/PycharmProjects/A1CheckpointOne/game/combat/attacks/bosses/willio",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks\bosses\willio" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks\bosses" />
       <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks" />
       <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks\nagra" />
       <recent name="C:\Users\benbe\PycharmProjects\A1CheckpointOne\game\combat\attacks\foddler" />
@@ -126,7 +132,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.game" />
       </list>
     </recent_temporary>
@@ -134,8 +139,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.31033.139" />
-        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.30387.127" />
+        <option value="bundled-python-sdk-3944b0c99280-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.30387.127" />
       </set>
     </attachedChunks>
   </component>
@@ -166,6 +171,7 @@
       <workItem from="1774883560964" duration="20000" />
       <workItem from="1774635431434" duration="94000" />
       <workItem from="1774890463757" duration="3610000" />
+      <workItem from="1774922822561" duration="3293000" />
     </task>
     <task id="LOCAL-00002" summary="required librrararys&#10;torch&#10;pygame CE&#10;python 3.9&#10;mr nnnnnnnnnnnnnaaaaaaaaagggggggggggrrrrrrrrrraaaaaaaaaaaaaaaa">
       <option name="closed" value="true" />
@@ -175,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774271063113</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="too hard">
+      <option name="closed" value="true" />
+      <created>1774907739009</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774907739009</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,12 +198,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="huiajwuiodjwaioiodjawd" />
     <MESSAGE value="required librrararys&#10;torch&#10;pygame CE&#10;python 3.9&#10;mr nnnnnnnnnnnnnaaaaaaaaagggggggggggrrrrrrrrrraaaaaaaaaaaaaaaa" />
-    <option name="LAST_COMMIT_MESSAGE" value="required librrararys&#10;torch&#10;pygame CE&#10;python 3.9&#10;mr nnnnnnnnnnnnnaaaaaaaaagggggggggggrrrrrrrrrraaaaaaaaaaaaaaaa" />
+    <MESSAGE value="too hard" />
+    <option name="LAST_COMMIT_MESSAGE" value="too hard" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AssignmentOne$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1773859030151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/combat/entities" />
     <SUITE FILE_PATH="coverage/AssignmentOne$game.coverage" NAME="game Coverage Results" MODIFIED="1773859041233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game/gameHandler/pygameWindow" />
-    <SUITE FILE_PATH="coverage/A1CheckpointOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774907656550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A1CheckpointOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774926130244" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AssignmentOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774050831842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MrNagraAssignmentOne$main.coverage" NAME="main Coverage Results" MODIFIED="1774619596446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

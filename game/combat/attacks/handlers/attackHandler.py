@@ -1,7 +1,8 @@
 import const
-from game.combat.attacks.nagra.nagraISANGRY import nagraISANGRY
+from game.combat.attacks.bosses.nagra.nagraISANGRY import nagraISANGRY
 from game.combat.combatMenu.boundaryLogic.boundary import boundaryLogic
-from game.combat.attacks.nagra.nagraIsGrinch import nagraIsGrinch
+from game.combat.attacks.bosses.nagra.nagraIsGrinch import nagraIsGrinch
+from game.combat.attacks.bosses.willio.beamSpinnerButGravity import beamSpinnerCoolerGravity
 #bro so special he needs to be imported
 class attackHandler:
     def __init__(self, screen, player):
@@ -21,14 +22,14 @@ class attackHandler:
             for atkClass in [entry[0] if isinstance(entry, tuple) else entry]
         )
         isBlue = soulMode == const.soulModeBlue or any(
-            (atkClass is None)
+            (atkClass is beamSpinnerCoolerGravity)
             for entry in enemyAttacks
             for atkClass in [entry[0] if isinstance(entry, tuple) else entry]
         )
         if isGreen:
             self.boundary = boundaryLogic(self.screen, self.player, const.soulModeGreen, 25)
         elif isBlue:
-            self.boundary = boundaryLogic(self.screen, self.player, const.soulModeGreen, 25)
+            self.boundary = boundaryLogic(self.screen, self.player, const.soulModeBlue)
         else:
             self.boundary = boundaryLogic(self.screen, self.player,const.soulModeRed)
         self.attacks = []
