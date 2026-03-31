@@ -54,16 +54,16 @@ noSaveData = {
 
 nagraAlive  = True
 killedNagra = False
-running = True
+running     = True
 
 def readSave():
     try:
-        data = chkSum.decryptSave(open('save.json').read())
-        for key, val in noSaveData.items():
+        data              = chkSum.decryptSave(open('save.json').read())
+        for key, val in   noSaveData.items():
             if key not in data:
                 data[key] = val
         chkSum.checkCheckSum()
-        return data
+        return            data
     except (FileNotFoundError, json.JSONDecodeError, Exception):
         print("save error")
         return dict(noSaveData)
@@ -108,16 +108,16 @@ def startDisplay():
 
     global shop, player, generatedOptions, trader, questNpc, roundCounter, manager, bossIndex, killedNagra
 
-    save = readSave()
-    player = pl(save)
-    shop = shoppersDrugMart(screen, player)
-    trader = tradar(screen, player)
-    questNpc = quest(screen, player)
+    save             = readSave()
+    player           = pl(save)
+    shop             = shoppersDrugMart(screen, player)
+    trader           = tradar(screen, player)
+    questNpc         = quest(screen, player)
     generatedOptions = False
-    roundCounter = save["round"]
-    killedNagra = save["killedNagra"]
-    manager = combatManager(screen, player, killedNagra)
-    bossIndex = 1
+    roundCounter     = save["round"]
+    killedNagra      = save["killedNagra"]
+    manager          = combatManager(screen, player, killedNagra)
+    bossIndex        = 1
 
 
 def generatePromts():
@@ -151,11 +151,11 @@ def typeWrite(screen, text):
     if not hasattr(typeWrite, "index"):
         typeWrite.index = 0
         typeWrite.lastUpdate = pygame.time.get_ticks()
-        typeWrite.font = pygame.font.SysFont("Arial", 24)
-        words = text.split(' ')
-        lines = []
-        currentLine = []
-        maxWidth = screen.get_width() - 40
+        typeWrite.font       = pygame.font.SysFont("Arial", 24)
+        words                = text.split(' ')
+        lines                = []
+        currentLine          = []
+        maxWidth             = screen.get_width() - 40
 
         for word in words:
             testLine = ' '.join(currentLine + [word])
@@ -187,14 +187,14 @@ def typeWrite(screen, text):
     return charsToShow > 0
 
 def giveChestLoot():
-    text = pygame.font.SysFont("Arial", 22)
-    itemName = random.choice(list(const.loot.keys()))
-    item = const.loot[itemName]
+    text                          = pygame.font.SysFont("Arial", 22)
+    itemName                      = random.choice(list(const.loot.keys()))
+    item                          = const.loot[itemName]
     if len(player.inventory) < 20:
         player.inventory.append(item)
-        written = text.render(f"you got {itemName}", True, const.red)
+        written                   = text.render(f"you got {itemName}", True, const.red)
     else:
-        written = text.render(f"no loot for you", True, const.red)
+        written                   = text.render(f"no loot for you", True, const.red)
     screen.blit(written, (20, 430))
     pygame.display.flip()
 
@@ -229,71 +229,71 @@ def nextRound(incrementRound=True):
     match roundCounter:
         case 10:
             rah = generateNodeChoices(True)
-            if player.kills >= 10:
-                bossIndex = 10
+            if player.kills                >= 10:
+                bossIndex                   = 10
             else:
-                bossIndex = 1
+                bossIndex                   = 1
         case 20:
             if player.kills >= 20 and killedNagra:
-                bossIndex = 11
+                bossIndex                   = 11
             else:
-                bossIndex = 2
+                bossIndex                   = 2
             print("pharoh is here")
-            rah = generateNodeChoices(True)
+            rah                             = generateNodeChoices(True)
         case 21:
-            rah = generateNodeChoices(True)
-            bossIndex = 3
+            rah                             = generateNodeChoices(True)
+            bossIndex                       = 3
         case 22:
             if(playGenoEnding()):
-                running = False
+                running                     = False
         case _:
-            rah = generateNodeChoices(False)
+            rah                             = generateNodeChoices(False)
 
 def startGame():
     global enemyCount, bossIndex, toBeUsedEnemies, killedNagra
 
     print("started game")
-    state = storyState
-    drawnNode = False
-    shopWasOpen = False
-    traderWasOpen = False
-    questWasOpen = False
-    toBeUsedEnemies = []
+    state                   = storyState
+    drawnNode               = False
+    shopWasOpen             = False
+    traderWasOpen           = False
+    questWasOpen            = False
+    toBeUsedEnemies         = []
     nextRound(roundCounter <= 0)
     global running
 
     while running:
-        events = pygame.event.get()
+        events             = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
-                running = False
+                running    = False
 
-        deltaTime = clock.tick(const.fpsCap) / 1000
+        deltaTime          = clock.tick(const.fpsCap) / 1000
 
         if trader.active:
-            traderWasOpen = True
+            traderWasOpen  = True
             screen.fill(const.black)
             trader.update(events)
             trader.draw()
         elif shop.active:
-            shopWasOpen = True
+            shopWasOpen    = True
             screen.fill(const.black)
             shop.update(events)
             shop.draw()
         elif questNpc.active:
-            questWasOpen = True
+            questWasOpen   = True
             screen.fill(const.black)
             questNpc.update(events)
             questNpc.draw()
         else:
             if traderWasOpen or questWasOpen:
-                drawnNode = False
-                traderWasOpen = False
-                questWasOpen = False
+                drawnNode      = False
+                traderWasOpen  = False
+                questWasOpen   = False
                 nextRound()
             if shopWasOpen:
-                drawnNode = False
-                shopWasOpen = False
+                drawnNode      = False
+                shopWasOpen    = False
 
             if state == storyState:
                 finished = typeWrite(screen, storyText)
@@ -413,7 +413,7 @@ def startGame():
                             e.alive = True
                             if hasattr(e, "attackRoundIndex"):
                                 e.attackRoundIndex.clear()
-                        if bossIndex in (1, 2, 10, 11):
+                        if bossIndex in (1, 2, 3, 10, 11):
                             match bossIndex:
                                 case 1:  playboss1Music()
                                 case 2:  playboss2Music()
